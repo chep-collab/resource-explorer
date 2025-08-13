@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 export default function SearchBar() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [search, setSearch] = useState(searchParams.get('name') || '')
+  const [search, setSearch] = useState<string>(searchParams.get('name') || '')
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -18,9 +18,7 @@ export default function SearchBar() {
         params.delete('name')
       }
 
-      // Reset to page 1 when searching
       params.set('page', '1')
-
       router.push(`/?${params.toString()}`)
     }, 400)
 
@@ -37,3 +35,4 @@ export default function SearchBar() {
     />
   )
 }
+

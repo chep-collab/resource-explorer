@@ -12,7 +12,25 @@ interface Character {
   id: number
   name: string
   image: string
-  [key: string]: any
+  status?: string
+  species?: string
+  type?: string
+  gender?: string
+  origin?: { name: string; url: string }
+  location?: { name: string; url: string }
+  episode?: string[]
+  url?: string
+  created?: string
+}
+
+interface CharactersResponse {
+  info?: {
+    count: number
+    pages: number
+    next: string | null
+    prev: string | null
+  }
+  results?: Character[]
 }
 
 export default function HomePage() {
@@ -22,13 +40,17 @@ export default function HomePage() {
   const sort = searchParams.get('sort')
   const showFavoritesOnly = searchParams.get('favorites') === 'true'
 
-  const { data, isLoading, isError } = useCharacters(query)
+  const { data, isLoading, isError } = useCharacters(query) as {
+    data: CharactersResponse | undefined
+    isLoading: boolean
+    isError: boolean
+  }
   const { favorites } = useFavorites()
 
   const getFilteredSortedCharacters = (): Character[] => {
     if (!data?.results) return []
 
-    let characters = data.results as Character[]
+    let characters = data.results
 
     if (showFavoritesOnly) {
       characters = characters.filter((char) => favorites.includes(char.id))
@@ -69,7 +91,12 @@ export default function HomePage() {
             return characters.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {characters.map((char) => (
-                  <CharacterCard key={char.id} character={char} />
+                  <CharacterCard
+                    key={char.id}
+                    character={char}
+                    isFavorite={favorites.includes(char.id)}
+                    onToggleFavorite={() => {}}
+                  />
                 ))}
               </div>
             ) : (
