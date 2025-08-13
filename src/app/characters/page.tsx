@@ -3,7 +3,7 @@
 import { useParams } from 'next/navigation'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import { useFavorites } from '../../../hooks/useFavorites'
+import { useFavorites } from '@/hooks/useFavorites'
 import { useState } from 'react'
 
 export default function CharacterDetailPage() {
