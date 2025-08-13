@@ -1,43 +1,40 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
-import { useFavorites } from '../hooks/useFavorites'
 
-type Character = {
+interface Character {
   id: number
   name: string
   image: string
-  species: string
-  status: string
 }
 
-export default function CharacterCard({ character }: { character: Character }) {
-  const { isFavorite, toggleFavorite } = useFavorites()
+interface Props {
+  character: Character
+  isFavorite: boolean
+  onToggleFavorite: () => void
+}
 
+export default function CharacterCard({ character, isFavorite, onToggleFavorite }: Props) {
   return (
-    <div className="relative border rounded p-4 shadow hover:shadow-lg transition">
+    <div className="border rounded p-2 shadow-sm space-y-2">
       <Link href={`/characters/${character.id}`}>
-        <div className="cursor-pointer">
-          <img
-            src={character.image}
-            alt={character.name}
-            className="w-full h-48 object-cover rounded"
-          />
-          <h2 className="text-lg font-bold mt-2">{character.name}</h2>
-          <p className="text-sm text-gray-600">
-            {character.species} — {character.status}
-          </p>
-        </div>
+        <Image
+          src={character.image}
+          alt={character.name}
+          width={300}
+          height={300}
+          className="rounded"
+        />
+        <h2 className="text-lg font-semibold">{character.name}</h2>
       </Link>
-
       <button
-        onClick={() => toggleFavorite(character.id)}
-        className={`absolute top-2 right-2 px-2 py-1 text-sm rounded ${
-          isFavorite(character.id) ? 'bg-yellow-400' : 'bg-gray-300'
+        onClick={onToggleFavorite}
+        className={`px-2 py-1 rounded text-sm ${
+          isFavorite ? 'bg-yellow-400' : 'bg-gray-200'
         }`}
-        aria-label="Toggle Favorite"
       >
-        {isFavorite(character.id) ? '★' : '☆'}
+        {isFavorite ? 'Unfavorite' : 'Favorite'}
       </button>
     </div>
   )
