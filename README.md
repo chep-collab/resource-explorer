@@ -10,7 +10,7 @@ A fast, responsive React app built with Next.js and TypeScript to explore charac
 ## 🚀 Live Preview
 
 
-
+Got errors but working on it
 
 
 ## 🛠️ Tech Stack
