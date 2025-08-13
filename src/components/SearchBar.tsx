@@ -11,11 +11,16 @@ export default function SearchBar() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       const params = new URLSearchParams(searchParams.toString())
-      if (search) {
-        params.set('name', search)
+
+      if (search.trim()) {
+        params.set('name', search.trim())
       } else {
         params.delete('name')
       }
+
+      // Reset to page 1 when searching
+      params.set('page', '1')
+
       router.push(`/?${params.toString()}`)
     }, 400)
 
@@ -28,7 +33,7 @@ export default function SearchBar() {
       value={search}
       onChange={(e) => setSearch(e.target.value)}
       placeholder="Search characters..."
-      className="border px-2 py-1 rounded w-full"
+      className="border px-3 py-2 rounded w-full mb-4"
     />
   )
 }

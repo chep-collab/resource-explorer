@@ -25,6 +25,7 @@ export default function CharacterCard({ character, isFavorite, onToggleFavorite 
           width={300}
           height={300}
           className="rounded"
+           priority
         />
         <h2 className="text-lg font-semibold">{character.name}</h2>
       </Link>
