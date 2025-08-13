@@ -1,4 +1,4 @@
-Absolutely! Here's your complete, copy-paste-ready **README.md** file. Just paste this into your project root and you're good to go:
+
 
 ```markdown
 # 🧪 Rick & Morty Resource Explorer
@@ -9,9 +9,9 @@ A fast, responsive React app built with Next.js and TypeScript to explore charac
 
 ## 🚀 Live Preview
 
-> _Optional: Add your Vercel link here once deployed._
+> _Add your Vercel link here once deployed._
 
----
+
 
 ## 🛠️ Tech Stack
 
@@ -21,7 +21,7 @@ A fast, responsive React app built with Next.js and TypeScript to explore charac
 - **React Query (@tanstack/react-query)**
 - **Rick & Morty API**
 
----
+
 
 ## 📦 How to Run Locally
 
@@ -39,7 +39,7 @@ npm run dev
 
 Then visit [http://localhost:3000](http://localhost:3000)
 
----
+
 
 ## ✨ Features
 
@@ -54,7 +54,7 @@ Then visit [http://localhost:3000](http://localhost:3000)
 - 🔄 Cancel in-flight requests with `AbortController`
 - 🧠 Client caching via React Query
 
----
+
 
 ## 🧱 Architecture Notes
 
@@ -64,7 +64,7 @@ Then visit [http://localhost:3000](http://localhost:3000)
 - **Favorites** are stored in `localStorage` and synced across views.
 - **React Query** handles caching, background refetching, and error states.
 
----
+
 
 ## ⚖️ Trade-Offs & Decisions
 
@@ -73,7 +73,7 @@ Then visit [http://localhost:3000](http://localhost:3000)
 - Scroll restoration not handled due to App Router limitations.
 - E2E testing omitted due to time constraints, but structure supports it.
 
----
+
 
 ## 🧩 What I'd Ship Next
 
@@ -83,7 +83,7 @@ If I had more time, I’d add:
 - 🔁 Scroll position restoration on back/forward
 - ♿ Improved accessibility (keyboard nav, ARIA labels)
 
----
+
 
 ## 📚 API Reference
 
@@ -91,6 +91,13 @@ Using [Rick & Morty API](https://rickandmortyapi.com/documentation)
 Endpoints:
 - `/character`
 - `/character/:id`
+
+
+
+
+
+
+
 
 
 
