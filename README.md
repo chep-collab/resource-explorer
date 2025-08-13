@@ -5,12 +5,11 @@
 
 A fast, responsive React app built with Next.js and TypeScript to explore characters from the Rick & Morty API. Users can search, filter, sort, favorite, and view detailed info—all synced to the URL for a shareable experience.
 
----
-
-## 🚀 Live Preview
 
 
-Got errors but working on it
+## 🌐 Hosted Preview
+
+Deployment is in progress. Encountered a minor build issue during setup on Vercel. Actively resolving it and will update this section with the live link once available.
 
 
 ## 🛠️ Tech Stack
