@@ -9,7 +9,7 @@ A fast, responsive React app built with Next.js and TypeScript to explore charac
 
 ## 🚀 Live Preview
 
-> _Add your Vercel link here once deployed._
+
 
 
 
