@@ -1,43 +1,45 @@
-'use client'
+// src/components/CharacterCard.tsx
 
 import Image from 'next/image'
-import Link from 'next/link'
+import React from 'react'
 
 interface Character {
   id: number
   name: string
+  status: string
+  species: string
   image: string
 }
 
-interface Props {
+interface CharacterCardProps {
   character: Character
-  isFavorite: boolean
-  onToggleFavorite: () => void
 }
 
-export default function CharacterCard({ character, isFavorite, onToggleFavorite }: Props) {
+const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
   return (
-    <div className="border rounded p-2 shadow-sm space-y-2">
-      <Link href={`/characters/${character.id}`}>
+    <div className="bg-white shadow-md rounded-lg overflow-hidden transition hover:scale-[1.02]">
+      <div className="relative w-full h-[300px]">
         <Image
           src={character.image}
           alt={character.name}
-          width={300}
-          height={300}
-          className="rounded"
+          fill
+          className="object-cover"
           priority
         />
-        <h2 className="text-lg font-semibold">{character.name}</h2>
-      </Link>
-      <button
-        onClick={onToggleFavorite}
-        className={`px-2 py-1 rounded text-sm ${
-          isFavorite ? 'bg-yellow-400' : 'bg-gray-200'
-        }`}
-      >
-        {isFavorite ? 'Unfavorite' : 'Favorite'}
-      </button>
+      </div>
+      <div className="p-4">
+        <h2 className="text-xl font-semibold mb-1">{character.name}</h2>
+        <p className="text-sm text-gray-600 mb-1">Species: {character.species}</p>
+        <p className={`text-sm font-medium ${
+          character.status === 'Alive' ? 'text-green-600' :
+          character.status === 'Dead' ? 'text-red-600' :
+          'text-gray-600'
+        }`}>
+          Status: {character.status}
+        </p>
+      </div>
     </div>
   )
 }
 
+export default CharacterCard

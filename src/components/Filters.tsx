@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
+import { ChangeEvent } from 'react'
 
 const statuses = ['alive', 'dead', 'unknown']
 const speciesList = ['human', 'alien', 'robot', 'animal']
@@ -8,6 +9,8 @@ const speciesList = ['human', 'alien', 'robot', 'animal']
 export default function Filters() {
   const router = useRouter()
   const searchParams = useSearchParams()
+
+  if (!searchParams) return null // safeguard for SSR
 
   const updateParam = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString())
@@ -20,12 +23,16 @@ export default function Filters() {
     router.push(`?${params.toString()}`)
   }
 
+  const currentStatus = searchParams.get('status') || ''
+  const currentSpecies = searchParams.get('species') || ''
+  const showFavorites = searchParams.get('favorites') === 'true'
+
   return (
     <div className="mb-6 flex flex-wrap gap-4 items-center">
       {/* Status Filter */}
       <select
-        defaultValue={searchParams.get('status') || ''}
-        onChange={(e) => updateParam('status', e.target.value)}
+        value={currentStatus}
+        onChange={(e: ChangeEvent<HTMLSelectElement>) => updateParam('status', e.target.value)}
         className="px-4 py-2 border rounded"
       >
         <option value="">All Statuses</option>
@@ -38,8 +45,8 @@ export default function Filters() {
 
       {/* Species Filter */}
       <select
-        defaultValue={searchParams.get('species') || ''}
-        onChange={(e) => updateParam('species', e.target.value)}
+        value={currentSpecies}
+        onChange={(e: ChangeEvent<HTMLSelectElement>) => updateParam('species', e.target.value)}
         className="px-4 py-2 border rounded"
       >
         <option value="">All Species</option>
@@ -54,7 +61,7 @@ export default function Filters() {
       <div className="flex items-center">
         <input
           type="checkbox"
-          checked={searchParams.get('favorites') === 'true'}
+          checked={showFavorites}
           onChange={(e) => updateParam('favorites', e.target.checked ? 'true' : '')}
           className="mr-2"
           id="favorites"

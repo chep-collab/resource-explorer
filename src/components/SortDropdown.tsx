@@ -1,31 +1,44 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
+import { ChangeEvent } from 'react'
+
+const sortOptions = [
+  { value: '', label: 'Default' },
+  { value: 'name-asc', label: 'Name Ascending' },
+  { value: 'name-desc', label: 'Name Descending' },
+]
 
 export default function SortDropdown() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const currentSort = searchParams?.get('sort') || ''
 
-  const updateSort = (value: string) => {
-    const params = new URLSearchParams(searchParams.toString())
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const params = new URLSearchParams(searchParams?.toString() || '')
+    const value = e.target.value
     if (value) {
       params.set('sort', value)
     } else {
       params.delete('sort')
     }
-    router.push(`?${params.toString()}`)
+    // Reset page to 1 when sorting changes
+    params.set('page', '1')
+    router.push(`/?${params.toString()}`)
   }
 
   return (
-    <div className="mb-6">
+    <div className="mb-4 flex justify-center">
       <select
-        defaultValue={searchParams.get('sort') || ''}
-        onChange={(e) => updateSort(e.target.value)}
-        className="px-4 py-2 border rounded"
+        value={currentSort}
+        onChange={handleChange}
+        className="border px-3 py-2 rounded shadow hover:border-gray-400 focus:outline-none"
       >
-        <option value="">Sort by</option>
-        <option value="name-asc">Name (A–Z)</option>
-        <option value="name-desc">Name (Z–A)</option>
+        {sortOptions.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
       </select>
     </div>
   )
