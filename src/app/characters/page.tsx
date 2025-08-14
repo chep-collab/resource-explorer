@@ -1,5 +1,3 @@
-// src/app/characters/page.tsx
-
 'use client';
 
 import { useSearchParams } from 'next/navigation';
@@ -10,7 +8,7 @@ export default function CharactersPage() {
   const searchParams = useSearchParams();
 
   const query = searchParams?.toString() ?? '';
-  const sort = searchParams?.get('sort');
+  const sort = searchParams?.get('sort') ?? '';
   const showFavoritesOnly = searchParams?.get('favorites') === 'true';
 
   const characters: (Character & { isFavorite: boolean })[] = [
