@@ -4,22 +4,21 @@
 
 import { useSearchParams } from 'next/navigation';
 import CharacterCard from '@/components/CharacterCard';
+import type { Character } from '@/components/CharacterCard';
 
 export default function CharactersPage() {
-  const searchParams = useSearchParams() ?? new URLSearchParams();
+  const searchParams = useSearchParams();
 
-  const query = searchParams.toString();
-  const sort = searchParams.get('sort');
-  const showFavoritesOnly = searchParams.get('favorites') === 'true';
+  const query = searchParams?.toString() ?? '';
+  const sort = searchParams?.get('sort');
+  const showFavoritesOnly = searchParams?.get('favorites') === 'true';
 
-  // Example character data — replace with real data or fetch logic
-  const characters = [
-    { id: 1, name: 'Aang', image: '/images/aang.png', isFavorite: true },
-    { id: 2, name: 'Katara', image: '/images/katara.png', isFavorite: false },
-    { id: 3, name: 'Zuko', image: '/images/zuko.png', isFavorite: true },
+  const characters: (Character & { isFavorite: boolean })[] = [
+    { id: 1, name: 'Aang', image: '/images/aang.png', status: 'Alive', species: 'Air Nomad', isFavorite: true },
+    { id: 2, name: 'Katara', image: '/images/katara.png', status: 'Alive', species: 'Water Tribe', isFavorite: false },
+    { id: 3, name: 'Zuko', image: '/images/zuko.png', status: 'Alive', species: 'Fire Nation', isFavorite: true },
   ];
 
-  // Apply filtering based on searchParams
   const filteredCharacters = characters
     .filter((char) => !showFavoritesOnly || char.isFavorite)
     .sort((a, b) => {
@@ -34,9 +33,9 @@ export default function CharactersPage() {
         {filteredCharacters.map((char) => (
           <CharacterCard
             key={char.id}
-            name={char.name}
-            image={char.image}
+            character={char}
             isFavorite={char.isFavorite}
+            onToggleFavorite={() => {}}
           />
         ))}
       </div>
